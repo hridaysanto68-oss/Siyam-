@@ -1,5 +1,6 @@
 const moment = require("moment-timezone");
 const fs = require("fs");
+const path = require("path");
 const { getStreamFromURL } = global.utils;
 
 // ================== 🔒 STRONG AUTHOR LOCK ==================
@@ -38,12 +39,47 @@ async function safeStream(url) {
   }
 }
 
+// ================== 🎥 VIDEO ROTATION SYSTEM ==================
+const videoLinks = [
+  "https://files.catbox.moe/mbt328.mp4",
+  "https://files.catbox.moe/96m226.mp4"
+];
+
+const countFile = path.join(__dirname, "owner_video_count.json");
+
+function getNextVideo() {
+  let index = 0;
+
+  try {
+    if (fs.existsSync(countFile)) {
+      const data = JSON.parse(fs.readFileSync(countFile, "utf8"));
+      index = data.index || 0;
+    }
+  } catch (e) {
+    console.log("Count file error:", e.message);
+  }
+
+  const video = videoLinks[index];
+
+  // next index
+  const nextIndex = (index + 1) % videoLinks.length;
+
+  try {
+    fs.writeFileSync(countFile, JSON.stringify({ index: nextIndex }));
+  } catch (e) {
+    console.log("Write count error:", e.message);
+  }
+
+  return video;
+}
+// ===========================================================
+
 module.exports = {
   config: {
     name: "owner",
     version: "4.0.0",
     author: "FARHAN-KHAN",
-    role: 2, // 🔒 owner only
+    role: 2,
     countDown: 10,
     shortDescription: { en: "Owner info" },
     category: "owner"
@@ -52,9 +88,11 @@ module.exports = {
   onStart: async function ({ message }) {
 
     const ownerFB1 = "https://www.facebook.com/share/14k1GZFVH2T/";
-    const ownerFB2 = "https://www.facebook.com/share/14k1GZFVH2T/"; // চাইলে আলাদা দিতে পারো
+    const ownerFB2 = "https://www.facebook.com/share/14k1GZFVH2T/";
 
-    const video = "https://files.catbox.moe/g5vr8h.mp4";
+    // 🎥 Auto video change system
+    const video = getNextVideo();
+
     const attachment = await safeStream(video);
 
     const time = moment().tz("Asia/Dhaka").format("hh:mm:ss A");
@@ -67,15 +105,6 @@ module.exports = {
 [🤖]↓:𝐁𝐎𝐓→𝐀𝐃𝐌𝐈𝐍:↓
 ➤ 『 𝐔𝐃𝐀𝐘 𝐇𝐀𝐒𝐀𝐍 𝐒𝐈𝐘𝐀𝐌 』
 ⋆✦⋆⎯⎯⎯⎯⎯⎯⎯⎯⎯⋆✦⋆
-
-╠══❖『𝐁𝐈𝐎 𝐀𝐃𝐌𝐈𝐍』❖══╣
-⊱༅༎😽💚༅༎⊱
-
--আমি নিজের মতোই চলি 😎🔥  
--আমি কপি না, আমি আলাদা 🖤  
--যারে ভালোবাসি, শেষ পর্যন্ত 💯  
-
-⊱༅༎😽💚༅༎⊱
 ╠═════════════════╣
 
 [🏠]↓:𝐀𝐃𝐃𝐑𝐄𝐒𝐒:↓
@@ -107,7 +136,7 @@ module.exports = {
 [🌍] 𝐅𝐀𝐂𝐄𝐁𝐎𝐎𝐊 𝐈𝐃 (❷)
 ➤ ${ownerFB2}
 
-╚═══❖𝗧𝗛𝗔𝗡𝗞 𝗬𝗢𝗨❖═══╝`
+╚═══❖👑𝆠፝𝐒𝐈𝐘𝐀𝐌-𝐇𝐀𝐒𝐀𝐍👑❖═══╝`
     };
 
     if (attachment) {
