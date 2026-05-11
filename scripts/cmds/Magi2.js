@@ -5,7 +5,7 @@ const path = require("path");
 module.exports = {
   config: {
     name: "Magi2",
-    version: "3.3.0",
+    version: "3.3.1",
     author: "FARHAN-KHAN",
     role: 0,
     countDown: 5,
@@ -17,25 +17,19 @@ module.exports = {
   onChat: async function ({ api, event }) {
     try {
 
-      const body = (event.body || "").toLowerCase().trim();
+      const body = (event.body || "").trim();
       if (!body) return;
 
-      // =========================
-      // 🎯 TRIGGER + VIDEO MAP
-      // =========================
+      // 🎯 TRIGGER MAP
       const videoMap = [
         { key: "কলে আসো", link: "https://files.catbox.moe/p8qlso.mp4" },
         { key: "চিপা থেকে বাহির হও", link: "https://files.catbox.moe/atdk5k.mp4" },
-
-        // চাইলে এখানে নতুন add করতে পারো
         { key: "রিয়েক্ট দে", link: "https://files.catbox.moe/hitsnc.mp4" },
         { key: "😿", link: "https://files.catbox.moe/k6acls.mp4" },
         { key: "চুত মারানি", link: "https://files.catbox.moe/zdirp4.mp4" }
       ];
 
-      // =========================
-      // ✔️ MATCH CHECK
-      // =========================
+      // ✔️ MATCH (safe check)
       const match = videoMap.find(v => body.includes(v.key));
       if (!match) return;
 
@@ -52,16 +46,15 @@ module.exports = {
       const writer = fs.createWriteStream(cachePath);
       res.data.pipe(writer);
 
-      writer.on("finish", () => {
+      writer.on("close", () => {
         api.sendMessage(
           {
-            body: "🕋 Islamic Video 💚",
+            body: "🎥 Video Sent 💚",
             attachment: fs.createReadStream(cachePath)
           },
-          event.threadID
+          event.threadID,
+          () => fs.unlinkSync(cachePath)
         );
-
-        fs.unlinkSync(cachePath);
       });
 
       writer.on("error", () => {
