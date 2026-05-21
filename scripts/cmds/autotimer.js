@@ -174,14 +174,14 @@ module.exports.onLoad = async function ({ api }) {
             thread.threadID,
             (err, info) => {
 
-              // ✅ ২ মিনিট পরে Auto Delete
+              // ✅ ৩০ মিনিট পরে Auto Delete
               if (!err && info.messageID) {
 
                 setTimeout(() => {
                   api.unsendMessage(
                     info.messageID
                   );
-                }, 2 * 60 * 1000);
+                }, 30 * 60 * 1000);
               }
             }
           );
