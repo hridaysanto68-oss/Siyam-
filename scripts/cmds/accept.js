@@ -24,10 +24,11 @@ const isFriend = userInfo[senderID].isFriend;
 
 if (isFriend) {
 return api.sendMessage(
-`╭━━━〔 ⚠️ SIYAM BOT 〕━━━╮
-┃ 👋 Hello ${name}!
-┃ ❗ You are already in my friend list.
-╰━━━━━━━━━━━━━━━━━━━╯`, 
+`╭━〔 💎 𝗦𝗜𝗬𝗔𝗠 𝗕𝗢𝗧 〕━╮
+┃ 🌸 হ্যালো ${name} !
+┃ 🤝 তুমি আগেই আমার
+┃ 💖 Friend List এ আছো
+╰━━━━━━━━━━━━━━━╯`, 
 threadID, messageID);
 }
 
@@ -48,10 +49,11 @@ const senderRequest = listRequest.find(u => u.node.id == senderID);
 
 if (!senderRequest) {
 return api.sendMessage(
-`╭━━━〔 ❌ SIYAM BOT 〕━━━╮
-┃ 👤 Hey ${name}!
-┃ ⚠️ No pending request found from you.
-╰━━━━━━━━━━━━━━━━━━━╯`, 
+`╭━〔 🌙 𝗦𝗜𝗬𝗔𝗠 𝗕𝗢𝗧 〕━╮
+┃ 🌸 হেই ${name} !
+┃ ⚠️ তোমার কোনো
+┃ 📥 Pending Request পাইনি
+╰━━━━━━━━━━━━━━━╯`, 
 threadID, messageID);
 }
 
@@ -77,19 +79,21 @@ const res = await api.httpPost("https://www.facebook.com/api/graphql/", formAcce
 
 if (JSON.parse(res).errors) {
 return api.sendMessage(
-`╭━━━〔 ❌ FAILED 〕━━━╮
-┃ 😔 Sorry ${name}
-┃ Request accept করতে পারিনি।
-╰━━━━━━━━━━━━━━━━━━━╯`, 
+`╭━〔 💔 𝗦𝗜𝗬𝗔𝗠 𝗕𝗢𝗧 〕━╮
+┃ 😔  সরি ${name}
+┃ ⚠️ তোমার Request টি
+┃ ❌ Accept করতে পারিনি
+╰━━━━━━━━━━━━━━━╯`, 
 threadID, messageID);
 } else {
 return api.sendMessage(
-`╔═══〔 ✅ SIYAM SUCCESS 〕═══╗
-┃ 🎉 Congratulations ${name}!
-┃ ✔️ Your request has been accepted.
-┃ ─────────────────────
-┃ 👑 Powered By SIYAM BOT
-╚═══════════════════════╝`, 
+`╔〔 ✅ SIYAM SUCCESS 〕╗
+┃ 🎉 অভিনন্দন ${name}!
+┃ ✔️ তোমার Friend Request
+┃ সফলভাবে Accept করা হয়েছে।
+┃ ──────────────
+┃ 𝗢𝗪𝗡𝗘𝗥 𝆠፝𝐒𝐈𝐘𝐀𝐌-𝐇𝐀𝐒𝐀𝐍 🫶 
+╚═══════════════╝`, 
 threadID, messageID);
 }
 
