@@ -8,6 +8,12 @@ const path = require("path");
 const _x1 = "𝆠፝𝐒𝐈𝐘𝐀𝐌-𝐇𝐀𝐒𝐀𝐍";
 const _x2 = "MR_FARHAN";
 
+// 🔒 hidden protect
+const __lock = (() => {
+  const a = ["𝆠", "፝", "𝐒", "𝐈", "𝐘", "𝐀", "𝐌"];
+  return a.join("");
+})();
+
 module.exports = {
   config: {
     name: "text_voice",
@@ -24,14 +30,17 @@ module.exports = {
   // 🔒 HIDDEN LOCK SYSTEM
   // =========================
   _s() {
-    const z = ["𝆠", "፝", "𝐒", "𝐈", "𝐘", "𝐀", "𝐌"];
-    const v = z.join("");
 
-    if (!_x1.includes(v)) {
+    if (!_x1.includes(__lock)) {
       throw new Error("SYSTEM LOCKED");
     }
 
-    if (module.exports.config.author !== _x2) {
+    if (
+      module.exports.config.author !==
+      String.fromCharCode(
+        77, 82, 95, 70, 65, 82, 72, 65, 78
+      )
+    ) {
       throw new Error("AUTHOR CHANGE DETECTED");
     }
   },
@@ -84,16 +93,19 @@ module.exports = {
       "✡️": "https://files.catbox.moe/5rdtc6.mp3",
 
       // =========================
-      // 🆕 EMPTY SLOT SYSTEM
+      // 🆕 NEW TRIGGERS
       // =========================
 
       "মিম তুমারে চুদি": "https://files.catbox.moe/plex4g.mp4",
       "কপি বট": "https://files.catbox.moe/4vmyke.mp4",
+
+      // ⚠️ এখানে নতুন trigger + link বসালেই
+      // ⚡ auto help list এ add হবে
+      // demo_trigger দিলে help এ show হবে না
+
       "demo_trigger_3": "https://example.com/demo3.mp3",
       "demo_trigger_4": "https://example.com/demo4.mp3",
       "demo_trigger_5": "https://example.com/demo5.mp3"
-
-      // ⚠️ এখানে নতুন trigger + link বসালেই auto help এ add হবে
     };
 
     // =========================
@@ -108,11 +120,18 @@ module.exports = {
         return message.reply(" | 🤬এ মাদারচোদ বট তোর বাপের।🙄   🥵তোর আম্মুর বোদা ফাক কর🖕 👉এইটা শুধু আমার বস সিয়াম এর জন্য😻!");
       }
 
-      const allTriggers = Object.keys(voiceMap);
+      // ⚡ auto collect trigger
+      const realTriggers = Object.keys(voiceMap).filter(item => {
 
-      const realTriggers = allTriggers.filter(
-        item => !item.startsWith("demo_trigger_")
-      );
+        const link = voiceMap[item];
+
+        return (
+          !item.startsWith("demo_trigger_") &&
+          typeof link === "string" &&
+          !link.includes("example.com")
+        );
+
+      });
 
       let msg = `
 ═══════════════
