@@ -24,13 +24,13 @@
   },
 
   "adminBot": [
-    "61589656899295",
-    "61589656899295"
+    "100037154624637",
+    "100037154624637"
   ],
 
   "security": {
     "enableOwnerLock": true,
-    "ownerUID": "61589656899295",
+    "ownerUID": "100037154624637",
     "ownerIndex": 0,
     "notes": "Do not change adminBot[0], bot will stop if modified"
   },
