@@ -1,4 +1,20 @@
 const { getTime } = global.utils;
+const axios = require("axios");
+const fs = require("fs-extra");
+const path = require("path");
+
+const videoLinks = [
+  "https://files.catbox.moe/bhzikp.mp4",
+  "https://files.catbox.moe/tk688p.mp4"
+];
+
+const countFile = path.join(__dirname, "autoinvite_count.json");
+const cacheDir = path.join(__dirname, "cache");
+
+// cache folder না থাকলে তৈরি করবে
+if (!fs.existsSync(cacheDir)) {
+  fs.mkdirSync(cacheDir, { recursive: true });
+}
 
 module.exports = {
   config: {
@@ -40,9 +56,62 @@ module.exports = {
 
       try {
         await api.addUserToGroup(leftID, threadID);
-        await message.send(form);
+
+        let currentIndex = 0;
+
+        if (fs.existsSync(countFile)) {
+          try {
+            currentIndex = JSON.parse(
+              fs.readFileSync(countFile, "utf8")
+            ).index || 0;
+          } catch {}
+        }
+
+        const selectedVideo = videoLinks[currentIndex % videoLinks.length];
+
+        fs.writeFileSync(
+          countFile,
+          JSON.stringify({
+            index: (currentIndex + 1) % videoLinks.length
+          })
+        );
+
+        const videoPath = path.join(
+          cacheDir,
+          `autoinvite_${Date.now()}.mp4`
+        );
+
+        const response = await axios({
+          url: selectedVideo,
+          method: "GET",
+          responseType: "stream"
+        });
+
+        const writer = fs.createWriteStream(videoPath);
+
+        await new Promise((resolve, reject) => {
+          response.data.pipe(writer);
+          writer.on("finish", resolve);
+          writer.on("error", reject);
+        });
+
+        await message.send({
+          body: form.body,
+          attachment: fs.createReadStream(videoPath)
+        });
+
+        setTimeout(() => {
+          try {
+            if (fs.existsSync(videoPath)) {
+              fs.unlinkSync(videoPath);
+            }
+          } catch {}
+        }, 5000);
+
       } catch (err) {
-        message.send("⚠️উফফ... ইউজারটাকে আবার অ্যাড দিতে পারলাম না 😿 🔒 হয়তো প্রাইভেসি বা অন্য কোনো সমস্যা আছে! 🤲 আল্লাহ যা করেন ভালোর জন্যই করেন 💖");
+        message.send(
+          "⚠️উফফ... ইউজারটাকে আবার অ্যাড দিতে পারলাম না 😿 🔒 হয়তো প্রাইভেসি বা অন্য কোনো সমস্যা আছে! 🤲 আল্লাহ যা করেন ভালোর জন্যই করেন 💖"
+        );
       }
     }
   }
