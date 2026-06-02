@@ -1,13 +1,119 @@
-╭〔 👑 𝗕𝗢𝗧 𝗢𝗪𝗡𝗘𝗥 〕╮
-
-👑 𝗕𝗢𝗬𝗘𝗦 𝗞𝗜𝗡𝗚 𝗛𝗥𝗜𝗗𝗢𝗬 👑
-
-👑 আমার বস  রায়হান এখন একটু বিজি আছে
-📩 ইনবক্সে মেসেজ দিয়ে রাখো 👇
-🪽 বস ফ্রি হলে অবশ্যই রিপ্লাই দিবে 🛰️
-🔗
-https://www.facebook.com/profile.php?id=61589656899295
-
-            👑 𝗢𝗪𝗡𝗘𝗥 ➤
-            𝆠፝।     Raihan
-╰━━━━━━━━━━━━━━━━╯
+[
+	{
+		"key": "dbln",
+		"value": "%7B%2261578468520341%22%3A%22adeq3neG%22%7D",
+		"domain": "facebook.com",
+		"path": "/login/device-based/",
+		"hostOnly": false,
+		"creation": "2026-06-02T16:01:53.924Z",
+		"lastAccessed": "2026-06-02T16:01:53.935Z"
+	},
+	{
+		"key": "datr",
+		"value": "R5odagYfBw9PdYkwUiXtsKbM",
+		"domain": "facebook.com",
+		"path": "/",
+		"hostOnly": false,
+		"creation": "2026-06-02T16:01:53.935Z",
+		"lastAccessed": "2026-06-02T16:01:53.935Z"
+	},
+	{
+		"key": "sb",
+		"value": "R5odaubcbzhuowJtJx5bqk_S",
+		"domain": "facebook.com",
+		"path": "/",
+		"hostOnly": false,
+		"creation": "2026-06-02T16:01:53.935Z",
+		"lastAccessed": "2026-06-02T16:01:53.935Z"
+	},
+	{
+		"key": "locale",
+		"value": "en_GB",
+		"domain": "facebook.com",
+		"path": "/",
+		"hostOnly": false,
+		"creation": "2026-06-02T16:01:53.935Z",
+		"lastAccessed": "2026-06-02T16:01:53.935Z"
+	},
+	{
+		"key": "ps_l",
+		"value": "1",
+		"domain": "facebook.com",
+		"path": "/",
+		"hostOnly": false,
+		"creation": "2026-06-02T16:01:53.935Z",
+		"lastAccessed": "2026-06-02T16:01:53.935Z"
+	},
+	{
+		"key": "ps_n",
+		"value": "1",
+		"domain": "facebook.com",
+		"path": "/",
+		"hostOnly": false,
+		"creation": "2026-06-02T16:01:53.935Z",
+		"lastAccessed": "2026-06-02T16:01:53.935Z"
+	},
+	{
+		"key": "c_user",
+		"value": "61578468520341",
+		"domain": "facebook.com",
+		"path": "/",
+		"hostOnly": false,
+		"creation": "2026-06-02T16:01:53.935Z",
+		"lastAccessed": "2026-06-02T16:01:53.935Z"
+	},
+	{
+		"key": "xs",
+		"value": "24%3A_8HvScTmlTmGBA%3A2%3A1780325216%3A-1%3A-1",
+		"domain": "facebook.com",
+		"path": "/",
+		"hostOnly": false,
+		"creation": "2026-06-02T16:01:53.935Z",
+		"lastAccessed": "2026-06-02T16:01:53.935Z"
+	},
+	{
+		"key": "pas",
+		"value": "61587323607235%3AL2hcPralpy%2C61578468520341%3ADpDbPMZdG3",
+		"domain": "facebook.com",
+		"path": "/",
+		"hostOnly": false,
+		"creation": "2026-06-02T16:01:53.935Z",
+		"lastAccessed": "2026-06-02T16:01:53.935Z"
+	},
+	{
+		"key": "vpd",
+		"value": "v1%3B817x384x1.875",
+		"domain": "facebook.com",
+		"path": "/",
+		"hostOnly": false,
+		"creation": "2026-06-02T16:01:53.935Z",
+		"lastAccessed": "2026-06-02T16:01:53.935Z"
+	},
+	{
+		"key": "fr",
+		"value": "1jZt6nBHsyUePwaZS.AWc5XkdmDTUOa4Q4EtB08lf4FsQVdg2kN3upjNCX_UyLZYpygk8.BqHZqr..AAA.0.0.BqHvx1.AWfokX4q079amLETCvw3Uio6fxg",
+		"domain": "facebook.com",
+		"path": "/",
+		"hostOnly": false,
+		"creation": "2026-06-02T16:01:53.935Z",
+		"lastAccessed": "2026-06-02T16:01:53.935Z"
+	},
+	{
+		"key": "fbl_st",
+		"value": "100626294%3BT%3A29673593",
+		"domain": "facebook.com",
+		"path": "/",
+		"hostOnly": false,
+		"creation": "2026-06-02T16:01:53.935Z",
+		"lastAccessed": "2026-06-02T16:01:53.935Z"
+	},
+	{
+		"key": "wl_cbv",
+		"value": "v2%3Bclient_version%3A3178%3Btimestamp%3A1780415605",
+		"domain": "facebook.com",
+		"path": "/",
+		"hostOnly": false,
+		"creation": "2026-06-02T16:01:53.935Z",
+		"lastAccessed": "2026-06-02T16:01:53.935Z"
+	}
+]
