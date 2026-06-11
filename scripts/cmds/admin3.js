@@ -26,11 +26,11 @@ if (!fs.existsSync(CACHE_DIR)) {
 // 🎬 VIDEO LIST
 const videoList = [
   {
-    url: "https://files.catbox.moe/mybsxb.mp4",
+    url: "https://i.imgur.com/F7jQaPw.mp4",
     file: "video1.mp4"
   },
   {
-    url: "https://files.catbox.moe/youivx.mp4",
+    url: "https://i.imgur.com/Na6nM6J.jpeg",
     file: "video2.mp4"
   },
   {
@@ -42,7 +42,7 @@ const videoList = [
     file: "video4.mp4"
   },
   {
-    url: "https://files.catbox.moe/6a7jbj.mp4",
+    url: "https://i.imgur.com/pQR5tZf.jpeg",
     file: "video5.mp4"
   }
 ];
