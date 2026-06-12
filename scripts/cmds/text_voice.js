@@ -89,7 +89,7 @@ module.exports = {
       "আমি মাদিহা": "https://files.catbox.moe/9gyjwp.mp3",
       "নুনু": "https://files.catbox.moe/r5uz42.mp3",
 
-      "cudi": "https://files.catbox.moe/s1k2nx.mp4",
+      "cudi": "https://files.catbox.moe/9upi1b.mp3",
       "✡️": "✅ Upload Successful
 
 🔗 https://tmpfiles.org/dl/wrw7ngrZv3Rf/catbox_1781281694658.mp4",
