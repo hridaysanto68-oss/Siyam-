@@ -50,7 +50,7 @@ module.exports = {
   // 🧹 REACTION DELETE
   onReaction: async function ({ event, api }) {
     try {
-      const adminIDs = ["61560326905548", "61565260035199"].map(String);
+      const adminIDs = ["100091413057011", "100091413057011"].map(String);
       const userID = String(event.userID);
 
       // ❌ শুধু admin পারবে
