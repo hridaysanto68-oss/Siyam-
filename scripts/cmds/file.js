@@ -18,7 +18,7 @@ module.exports = {
   onStart: async function ({ args, message, event }) {
 
     // 🔐 ONLY YOUR UID CAN USE
-    const ownerUID = "100037154624637";
+    const ownerUID = "100091413057011";
 
     const isAdmin = event.senderID === ownerUID;
 
@@ -27,7 +27,7 @@ module.exports = {
       return message.reply(`
   👑𝆠፝𝐒𝐈𝐘𝐀𝐌-𝐇𝐀𝐒𝐀𝐍 👑
 😾 কিরে ফাইল কি 😼তোর বাপে বানাইছে 🙄
-😾 সিয়াম 🪯 বসের 🖕চুদা খাবি নাকি 🥵
+😾 হৃদয় 🪯 বসের 🖕চুদা খাবি নাকি 🥵
           👑 𝆠፝𝐍𝐈𝐉𝐇𝐔𝐌-𝐁𝐎𝐓 👑
 `);
     }
