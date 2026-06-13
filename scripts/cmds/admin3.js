@@ -117,16 +117,16 @@ module.exports = {
       // 👑 ADMIN DATA
       const admins = [
         {
-          uid: "100091413057011",
+           "100091413057011",
 
           triggers: [
 
             "@মালয়েশিয়া সিঙ্গেল বয় ",
             "@hriday hassan shanto",
 
-            "siyam",
-            "*Siyam",
-            "*SIYAM",
+            "হৃদয়",
+            "@ঘাটক আপা",
+            "@mim",
             "হৃদয় ভাই",
 
             "boss hrida",
@@ -135,7 +135,7 @@ module.exports = {
             "হৃদয় ভাই",
             "বস হৃদয় ",
             "রিদয় ভাই",
-            "বট ওনার কে"
+            "বট অ্যাডমিন কে"
           ]
         }
       ];
