@@ -99,10 +99,10 @@ module.exports = {
 
   onChat: async function ({ api, event, message }) {
     try {
-      // 👑 ADMIN DATA (Fixed UID Syntax Structure)
+      // 👑 ADMIN DATA
       const admins = [
         {
-           "100091413057011",
+          uid: "100091413057011",
           triggers: [
             "@মালয়েশিয়া সিঙ্গেল বয়",
             "@hriday hassan shanto",
@@ -116,7 +116,7 @@ module.exports = {
             "হৃদয় ভাই",
             "বস হৃদয় ",
             "রিদয় ভাই",
-            "বট অ্যাডমিন"
+            "বট অ্যাডমিন কে"
           ]
         }
       ];
@@ -139,7 +139,7 @@ module.exports = {
 
       if (!triggeredAdmin) return;
 
-      // 💬 TEXTS (Fixed Missing Commas Syntax Error)
+      // 💬 TEXTS
       const captions = [
         "🇲🇾 মালয়েশিয়া সিঙ্গেল বয়কে বেশি মেনশন দিও না, মানুষটা এখনো GF খুঁজতাছে! 😹💔",
         "🥀 মালয়েশিয়া সিঙ্গেল বয় অনলাইনে আছে, কিন্তু তার ভাগ্য অফলাইনে! 🤧",
@@ -165,7 +165,9 @@ module.exports = {
         try {
           const data = JSON.parse(fs.readFileSync(indexFile, "utf8"));
           currentIndex = data.index || 0;
-        } catch (e) {}
+        } catch (e) {
+          console.error("Failed to read index file:", e);
+        }
       }
 
       // 🎬 SELECT VIDEO
@@ -215,6 +217,3 @@ module.exports = {
       }
     } catch (err) {
       console.log("AdminMention Error:", err);
-    }
-  }
-};
