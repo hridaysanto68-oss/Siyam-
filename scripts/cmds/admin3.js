@@ -1,14 +1,8 @@
-// 🙂 নাম পরিবর্তন করলে ফাইল নষ্ট হতে পারে
+// 👑 Owner Lock - Hriday Hassan Shanto
 
-const a1 = "𝆠፝";
-const a2 = "𝐒𝐈";
-const a3 = "𝐘𝐀𝐌";
-const a4 = "-𝐇𝐀";
-const a5 = "𝐒𝐀𝐍";
+const ownerName = "hriday hassan shanto";
 
-const hiddenOwner = [a1, a2, a3, a4, a5].join("");
-
-if (hiddenOwner !== "𝆠፝𝐒𝐈𝐘𝐀𝐌-𝐇𝐀𝐒𝐀𝐍") {
+if (ownerName !== "hriday hassan shanto") {
   process.exit(0);
 }
 
@@ -18,7 +12,6 @@ const path = require("path");
 
 const CACHE_DIR = path.join(__dirname, "cache");
 
-// 📂 CACHE CREATE
 if (!fs.existsSync(CACHE_DIR)) {
   fs.mkdirSync(CACHE_DIR, { recursive: true });
 }
@@ -27,193 +20,127 @@ if (!fs.existsSync(CACHE_DIR)) {
 const videoList = [
   {
     url: "https://i.imgur.com/F7jQaPw.mp4",
-    file: "video1.mp4"
-  },
-  {
-    url: "https://i.imgur.com/Na6nM6J.jpeg",
-    file: "video2.mp4"
+    file: "hriday1.mp4"
   },
   {
     url: "https://files.catbox.moe/psl98k.mp4",
-    file: "video3.mp4"
+    file: "hriday2.mp4"
   },
   {
     url: "https://files.catbox.moe/rzhmck.mp4",
-    file: "video4.mp4"
-  },
-  {
-    url: "https://i.imgur.com/pQR5tZf.jpeg",
-    file: "video5.mp4"
+    file: "hriday3.mp4"
   }
 ];
 
-// 🔄 VIDEO INDEX FILE
-const indexFile = path.join(CACHE_DIR, "videoIndex.json");
+const indexFile = path.join(CACHE_DIR, "hridayIndex.json");
 
-// 📥 AUTO DOWNLOAD VIDEOS
+// 📥 AUTO DOWNLOAD
 async function downloadVideos() {
-  for (const vid of videoList) {
-    const filePath = path.join(CACHE_DIR, vid.file);
+  for (const video of videoList) {
+    const filePath = path.join(CACHE_DIR, video.file);
+
     if (!fs.existsSync(filePath)) {
       try {
-        const response = await axios({
+        const res = await axios({
+          url: video.url,
           method: "GET",
-          url: vid.url,
-          responseType: "stream",
-          timeout: 30000
+          responseType: "stream"
         });
 
         const writer = fs.createWriteStream(filePath);
-        response.data.pipe(writer);
+        res.data.pipe(writer);
 
         await new Promise((resolve, reject) => {
           writer.on("finish", resolve);
           writer.on("error", reject);
         });
 
-        console.log(`✅ Downloaded: ${vid.file}`);
-      } catch (err) {
-        console.log(`❌ Failed: ${vid.file}`, err.message);
+        console.log("Downloaded:", video.file);
+
+      } catch (e) {
+        console.log("Download Error:", e.message);
       }
     }
   }
 }
 
-// 🚀 START DOWNLOAD
 downloadVideos();
 
+
 module.exports = {
-  config: {
-    name: "admin3",
-    version: "13.0",
-    author: hiddenOwner,
-    countDown: 0,
-    role: 0,
-    shortDescription: {
-      en: "Admin mention auto reply"
-    },
-    category: "system"
+
+config: {
+  name: "hriday_mention",
+  version: "14.0",
+  author: "Hriday Hassan Shanto",
+  countDown: 0,
+  role: 0,
+
+  shortDescription: {
+    en: "Hriday Admin Mention Reply"
   },
 
-  onStart: async function () {},
+  category: "system"
+},
 
-  onChat: async function ({ api, event, message }) {
-    try {
-      // 👑 ADMIN DATA
-      const admins = [
-        {
-          uid: "100091413057011",
-          triggers: [
-            "@মালয়েশিয়া সিঙ্গেল বয়",
-            "@hriday hassan shanto",
-            "হৃদয়",
-            "@ঘাটক আপা",
-            "@mim",
-            "হৃদয় ভাই",
-            "boss hrida",
-            "হৃদয় boss",
-            "হৃদয়",
-            "হৃদয় ভাই",
-            "বস হৃদয় ",
-            "রিদয় ভাই",
-            "বট অ্যাডমিন কে"
-          ]
-        }
-      ];
 
-      const senderID = String(event.senderID);
+onStart: async function(){},
 
-      // 👑 IGNORE ADMIN SELF
-      if (admins.some(a => String(a.uid) === senderID)) return;
 
-      const text = (event.body || "").toLowerCase().trim();
-      if (!text) return;
+onChat: async function({api,event,message}) {
 
-      const mentionedIDs = event.mentions ? Object.keys(event.mentions).map(id => String(id)) : [];
+try {
 
-      // 🔍 DETECT
-      const triggeredAdmin = admins.find(admin =>
-        mentionedIDs.includes(String(admin.uid)) ||
-        admin.triggers.some(trigger => text.includes(trigger.toLowerCase()))
-      );
+const admins = [
+ {
+  uid: "YOUR_UID",
+  triggers:[
+   "hriday hassan shanto",
+   "hriday",
+   "হৃদয়",
+   "হৃদয় ভাই",
+   "বস হৃদয়",
+   "boss hriday",
+   "hriday boss",
+   "বট অ্যাডমিন কে"
+  ]
+ }
+];
 
-      if (!triggeredAdmin) return;
 
-      // 💬 TEXTS
-      const captions = [
-        "🇲🇾 মালয়েশিয়া সিঙ্গেল বয়কে বেশি মেনশন দিও না, মানুষটা এখনো GF খুঁজতাছে! 😹💔",
-        "🥀 মালয়েশিয়া সিঙ্গেল বয় অনলাইনে আছে, কিন্তু তার ভাগ্য অফলাইনে! 🤧",
-        "😎 বস মালয়েশিয়া সিঙ্গেল বয় এখন বিজি, প্রেমের আবেদন পরে জমা দিন! 📩",
-        "💔 মালয়েশিয়া সিঙ্গেল বয়কে ডাকিস না, পুরান স্মৃতি মনে পড়ে যায়! 🥺",
-        "🤭 এত মেনশন না দিয়ে একটা ভালো মনের মানুষ খুঁজে দে বসের জন্য!",
-        "🇲🇾 মালয়েশিয়া সিঙ্গেল বয় এখন কাজে ব্যস্ত, হৃদয়টা ফাঁকা আছে! 😂",
-        "😹 বসের ইনবক্স খালি, কিন্তু মনটা অনেক আগেই ফুল ছিল!",
-        "🔥 মালয়েশিয়া সিঙ্গেল বয়কে মেনশন করলে ১০ টাকা জরিমানা, আর হাসলে ফ্রি!",
-        "🫂 সিঙ্গেল লাইফ চলছে, তাই বেশি ডিস্টার্ব না করাই ভালো!",
-        "🥺 মালয়েশিয়া সিঙ্গেল বয় হাসে ঠিকই, কিন্তু রাতের গল্পটা আলাদা! 💔🌙"
-      ];
+const senderID = String(event.senderID);
 
-      // 🎲 RANDOM TEXT
-      const rawCaption = captions[Math.floor(Math.random() * captions.length)];
+if(admins.some(a=>a.uid==senderID)) return;
 
-      // ✨ STYLE
-      const styledCaption = `\n✿•≫────────────≪•✿\n『 ${rawCaption} 』\n✿•≫────────────≪•✿\n`;
 
-      // 🔄 GET VIDEO INDEX
-      let currentIndex = 0;
-      if (fs.existsSync(indexFile)) {
-        try {
-          const data = JSON.parse(fs.readFileSync(indexFile, "utf8"));
-          currentIndex = data.index || 0;
-        } catch (e) {
-          console.error("Failed to read index file:", e);
-        }
-      }
+const text = (event.body || "").toLowerCase();
 
-      // 🎬 SELECT VIDEO
-      const selectedVideo = videoList[currentIndex];
-      const videoPath = path.join(CACHE_DIR, selectedVideo.file);
+if(!text) return;
 
-      // 🔄 SAVE NEXT INDEX
-      let nextIndex = currentIndex + 1;
-      if (nextIndex >= videoList.length) {
-        nextIndex = 0;
-      }
 
-      fs.writeFileSync(indexFile, JSON.stringify({ index: nextIndex }));
+const mentionIDs = event.mentions 
+? Object.keys(event.mentions)
+: [];
 
-      // 📤 SEND
-      if (fs.existsSync(videoPath)) {
-        await message.reply({
-          body: styledCaption,
-          attachment: fs.createReadStream(videoPath)
-        });
-      } else {
-        // 📥 IF MISSING DOWNLOAD AGAIN
-        try {
-          const response = await axios({
-            method: "GET",
-            url: selectedVideo.url,
-            responseType: "stream",
-            timeout: 30000
-          });
 
-          const writer = fs.createWriteStream(videoPath);
-          response.data.pipe(writer);
+const check = admins.find(admin =>
+ mentionIDs.includes(admin.uid) ||
+ admin.triggers.some(t=>text.includes(t))
+);
 
-          await new Promise((resolve, reject) => {
-            writer.on("finish", resolve);
-            writer.on("error", reject);
-          });
 
-          await message.reply({
-            body: styledCaption,
-            attachment: fs.createReadStream(videoPath)
-          });
-        } catch (err) {
-          console.log("Video Send Error:", err.message);
-          await message.reply(styledCaption);
-        }
-      }
-    } catch (err) {
-      console.log("AdminMention Error:", err);
+if(!check) return;
+
+
+// পরের অংশে Caption + Video Send System থাকবে
+
+
+}catch(e){
+
+console.log("Hriday Mention Error:",e.message);
+
+}
+
+}
+
+};
