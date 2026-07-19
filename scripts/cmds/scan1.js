@@ -1,6 +1,6 @@
 module.exports = {
   config: {
-    name: "scan2",
+    name: "scan1",
     aliases: ["charitro", "nature", "vondo"],
     version: "1.0.5",
     author: "Mr.King",
