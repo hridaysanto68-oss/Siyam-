@@ -5,11 +5,11 @@ const axios = require("axios");
 
 module.exports = {
   config: {
-    name: "love5",
+    name: "love4",
     author: "MR_FARHAN",
     version: "0.0.7",
     role: 0,
-    category: "love",
+    category: "love4",
     shortDescription: {
       en: "💘 Find your perfect match"
     },
