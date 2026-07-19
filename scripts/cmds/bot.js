@@ -64,7 +64,7 @@ lowerBody.startsWith("বট") ||
 lowerBody.startsWith("baby") ||
 lowerBody.startsWith("bby") ||
 lowerBody.startsWith("নিঝুম") ||
-lowerBody.startsWith("nijhum")
+lowerBody.startsWith("mim")
 ) {
 
 const text = body.replace(/^(bot|বট|baby|bby|নিঝুম|nijhum)\s*/i, "").trim();
