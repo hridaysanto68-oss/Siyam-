@@ -3,8 +3,8 @@ const fs = require("fs-extra");
 const path = require("path");
 
 const gifLinks = [
-  "https://i.imgur.com/LaJEm5S.gif",
-  "https://i.imgur.com/ctfxKEa.gif"
+  "https://i.imgur.com/Na6nM6J.jpeg",
+  "https://i.imgur.com/pQR5tZf.jpeg"
 ];
 
 module.exports = {
@@ -47,11 +47,11 @@ module.exports = {
     try {
 
       const loadingMsg = await api.sendMessage(
-`       👑 𝗡𝗜𝗝𝗛𝗨𝗠 𝗕𝗢𝗧✡️
+`       𓆩🤖𓆪 𝐋𝐚𝐦𝐢𝐲𝐚 𝐁𝐨𝐭 𓆩🤖𓆪
 
 📡 𝗛𝗘𝗟𝗣 𝟯 𝗟𝗢𝗔𝗗𝗜𝗡𝗚... ⏳ 𝗣𝗟𝗘𝗔𝗦𝗘 𝗪𝗔𝗜𝗧
  
-      👑𝗦𝗜𝗬𝗔𝗠 𝗛𝗔𝗦𝗔𝗡👑`,
+      𓆩🖤𓆪 𝐇𝐫𝐢𝐝𝐚𝐲 𝐇𝐚𝐬𝐬𝐚𝐧 𝐒𝐡𝐚𝐧𝐭𝐨 𓆩🖤𓆪`,
         event.threadID
       );
 
@@ -109,7 +109,7 @@ module.exports = {
 ┃ 📡 𝗦𝗨𝗖𝗖𝗘𝗦𝗦𝗙𝗨𝗟𝗟𝗬
 ┃ 💫 𝗘𝗻𝗷𝗼𝘆 𝗧𝗵𝗲 𝗣𝗿𝗲𝗺𝗶𝘂𝗺
 ┃ 🪬          𝗩𝗶𝗲𝘄
-┃ 🪯👑𝆠፝𝐒𝐈𝐘𝐀𝐌-𝐇𝐀𝐒𝐀𝐍 👑
+┃ 🪯𓆩🤖𓆪 𝐋𝐚𝐦𝐢𝐲𝐚 𝐁𝐨𝐭 𓆩🤖𓆪
 ╰━━━━━━━━━━━━━━━━━╯`,
             attachment: fs.createReadStream(filePath)
           },
