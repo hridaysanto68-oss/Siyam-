@@ -3,19 +3,18 @@ const AUTHOR = "SIYAM"; // 🔒 DO NOT CHANGE
 module.exports = {
 	config: {
 		name: "all",
-		version: "2.1",
-		author: AUTHOR, // 🔒 LOCKED
+		version: "2.2",
+		author: AUTHOR,
 		countDown: 5,
 		role: 1,
 		description: {
-			en: "Tag all members with stylish message"
+			en: "Mention all members"
 		},
 		category: "box chat"
 	},
 
-	onStart: async function ({ message, event }) {
+	onStart: async function ({ message, event, api }) {
 
-		// 🔒 AUTHOR LOCK SYSTEM
 		if (module.exports.config.author !== AUTHOR) {
 			console.log("⛔ AUTHOR MODIFIED! FILE LOCKED.");
 			process.exit(1);
@@ -23,21 +22,19 @@ module.exports = {
 
 		try {
 
-			const { participantIDs } = event;
+			const { participantIDs, threadID } = event;
 			const mentions = [];
 
-			// ✅ BOT INFO AUTO UPDATE
 			const botName =
 				global.GoatBot?.config?.botName ||
 				global.config?.BOTNAME ||
-				"👑𝗡𝗜𝗝𝗛𝗨𝗠 𝗕𝗢𝗧";
+				"👑 NIJHUM BOT";
 
 			const prefix =
 				global.GoatBot?.config?.prefix ||
 				global.config?.PREFIX ||
 				"/";
 
-			// ✅ REAL TIME & REAL DATE
 			const now = new Date();
 
 			const time = now.toLocaleTimeString("en-US", {
@@ -49,66 +46,56 @@ module.exports = {
 			});
 
 			const date = now.toLocaleDateString("en-GB", {
-				timeZone: "Asia/Dhaka",
-				day: "2-digit",
-				month: "2-digit",
-				year: "numeric"
+				timeZone: "Asia/Dhaka"
 			});
 
-			// 🔥 Stylish Message
-			let body = `╔𝐑𝐎𝐘𝐀𝐋 𝐕𝐈𝐏 𝐁𝐑𝐎𝐀𝐃𝐂𝐀𝐒𝐓╗
-┃
-┃ 𝐀𝐓𝐓𝐄𝐍𝐓𝐈𝐎𝐍𝐄𝐕𝐄𝐑𝐘𝐎𝐍𝐄
-┃         👑𝗕𝗢𝗧 𝗢𝗪𝗡𝗘𝗥 👑
-┃
-┃      👑 𝆠፝𝐒𝐈𝐘𝐀𝐌-𝐇𝐀𝐒𝐀𝐍 👑
-╠════════════════╣
-┃ 👥 @everyone
-┃
-┃ 🚨 চিপা থেকে  📣..
-┃ 👺 এখনই বের হও 😾🔥
-┃
-┃ 🌚 একটা করে 🤭
-┃ 💍 জামাই দিমু 😽🐸
-┃
-┃ 🌝 আর একটা করে 🤐
-┃ 👰 বউ দিমু 😼✨
-┃
-┃ 👑 এখনো বের হলি না? 😾
-┃ 📢 দাঁড়া আসতেছি 🐸⚡
-┃
-┃ ❄️ চিপার মধ্যে
-┃ 🧊 বরফ দিমু 😼🥶
-┃
-╠═══════════════╣
-┃ 🤖 𝐁𝐎𝐓 ➤ ${botName}
-┃ ⚙️ 𝐏𝐑𝐄𝐅𝐈𝐗   ➤ ${prefix}
-┃
-┃ ⏰ 𝐓𝐈𝐌𝐄    ➤ ${time}
-┃ 📅 𝐃𝐀𝐓𝐄   ➤ ${date}
-┃
-╠═══════════════╣
-┃ 🔗 𝐎𝐅𝐅𝐈𝐂𝐈𝐀𝐋 𝐅𝐀𝐂𝐄𝐁𝐎𝐎𝐊
-┃ 🌐 facebook.com/UID: 61589656899295
-┃
-┃
-╚〔 👑 𝗡𝗜𝗝𝗛𝗨𝗠 𝗕𝗢𝗧 👑 ╝`;
+			let body = `╔════👑 lamiya bot 👑════╗
 
-			// ✅ SAFE MENTION
-			let index = body.indexOf("@everyone");
+📢 সবাই একটু অ্যাক্টিভ হও!
 
-			if (index < 0)
-				index = 0;
+🔥 সবাইকে মেনশন করা হয়েছে।
+💬 দ্রুত রিপ্লাই দাও।
+
+━━━━━━━━━━━━━━━━━━
+🤖 BOT    : ${botName}
+⚙️ PREFIX : ${prefix}
+
+🕒 TIME   : ${time}
+📅 DATE   : ${date}
+
+👑 OWNER : hriday hassan shanto 
+🆔 UID : 61578037541206
+
+━━━━━━━━━━━━━━━━━━
+
+`;
 
 			for (const uid of participantIDs) {
+				try {
+					const info = await api.getUserInfo(uid);
+					const name = info[uid]?.name || "Member";
 
-				mentions.push({
-					tag: "@",
-					id: uid,
-					fromIndex: index
-				});
+					const tag = `@${name}`;
+					mentions.push({
+						tag,
+						id: uid,
+						fromIndex: body.length
+					});
 
+					body += `${tag} `;
+				}
+				catch {
+					const tag = "@Member";
+					mentions.push({
+						tag,
+						id: uid,
+						fromIndex: body.length
+					});
+					body += `${tag} `;
+				}
 			}
+
+			body += "\n\n👑 Thanks for staying active.";
 
 			return message.reply({
 				body,
@@ -116,16 +103,9 @@ module.exports = {
 			});
 
 		}
-
 		catch (err) {
-
 			console.error(err);
-
-			return message.reply(
-				"❌ Error:\n" + err.message
-			);
-
+			return message.reply("❌ Error:\n" + err.message);
 		}
-
 	}
 };
