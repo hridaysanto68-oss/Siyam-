@@ -10,7 +10,7 @@ let categoryEmoji = null;
 
 // 🎥 VIDEO ROTATION SYSTEM
 const HELP_VIDEOS = [
-  "https://files.catbox.moe/0wx30s.mp4",
+  "https://files.catbox.moe/0feqwu.mp4",
   "https://files.catbox.moe/rjdbb9.mp4"
 ];
 
@@ -160,7 +160,7 @@ module.exports = {
 
     // 📜 FULL LIST
     if (!input) {
-      let msg = `╭───────❁\n│👑‿𝐒𝐈𝐘𝐀𝐌 𝗛𝗘𝗟𝗣 𝗟𝗜𝗦𝗧👑 \n╰────────────❁\n`;
+      let msg = `╭───────❁\n│👑hriday hassan shanto👑 \n╰────────────❁\n`;
 
       for (const cat of Object.keys(categories).sort()) {
         msg += `╭─────✰『 ${getCategoryEmoji(cat)} ${fontConvert(cat, "category")} 』\n`;
@@ -172,7 +172,7 @@ module.exports = {
       const total = Object.values(categories).reduce((a, b) => a + b.length, 0);
 
       msg += `╭─────✰[🪬 𝐄𝐍𝐉𝐎𝐘 🪬]\n│> TOTAL COMMANDS: [${total}]\n│\n│> TYPE: [ ${prefix}help <command> ]\n│\n│> FB.LINK: [https://www.facebook.com/share/1LDy7c49aK/]\n╰────────────✰\n`;
-      msg += `╭─────✰\n│ 🐲 ‿𝐍𝐈𝐉𝐇𝐔𝐌-𝗕𝗢𝗧 🐲\n╰────────────✰`;
+      msg += `╭─────✰\n│ 🐲 ‿lamiya lamiya bot 🐲\n╰────────────✰`;
 
       return message.reply({
         body: msg,
