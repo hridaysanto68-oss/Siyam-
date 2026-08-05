@@ -2,79 +2,23 @@ const axios = require("axios");
 const fs = require("fs-extra");
 const path = require("path");
 
-// 🔒 Author Lock
-const LOCKED_AUTHOR = "Farhan-Khan (🔒 Do Not Change)";
-
-// 📂 Global control file
-const controlFile = path.join(__dirname, "cache", "control.json");
-
 module.exports = {
   config: {
-    name: "text_voice3",
-    version: "5.0.0",
-    author: "Farhan-Khan (🔒 Do Not Change)",
+    name: "voice3",
+    version: "1.0.0",
+    author: "Farhan-Khan",
     countDown: 1,
     role: 0,
-    shortDescription: "Voice + React + Seen + Global Control",
-    longDescription: "Auto voice + react + seen + ON/OFF system",
-    category: "system"
+    shortDescription: "Auto Voice Reply",
+    longDescription: "Reply with voice when specific words are detected",
+    category: "fun"
   },
 
-  onStart: async function () {
-    if (module.exports.config.author !== LOCKED_AUTHOR) {
-      console.error("❌ Author changed! Script stopped.");
-      process.exit(1);
-    }
-
-    if (!fs.existsSync(controlFile)) {
-      fs.writeFileSync(controlFile, JSON.stringify({ active: true }));
-    }
-  },
-
-  onChat: async function ({ event, api, message }) {
-    if (!event.body || !event.messageID) return;
+  onChat: async function ({ event, message }) {
+    if (!event.body) return;
 
     const inputRaw = event.body.trim();
-    const input = inputRaw.toLowerCase();
 
-    // 📂 Load status
-    let status = true;
-    if (fs.existsSync(controlFile)) {
-      status = JSON.parse(fs.readFileSync(controlFile)).active;
-    }
-
-    // 🔘 Commands
-    if (input === "/autoreact off") {
-      fs.writeFileSync(controlFile, JSON.stringify({ active: false }));
-      return message.reply("❌ Auto React & Seen OFF (All Groups)");
-    }
-
-    if (input === "/autoreact on") {
-      fs.writeFileSync(controlFile, JSON.stringify({ active: true }));
-      return message.reply("✅ Auto React & Seen ON (All Groups)");
-    }
-
-    // ❌ Ignore prefix commands
-    const prefixes = ["/", "!", "#"];
-    if (prefixes.some(p => inputRaw.startsWith(p))) return;
-
-    // 👀 Auto Seen
-    if (status) {
-      try {
-        api.markAsRead(event.threadID);
-      } catch (e) {}
-    }
-
-    // 😆 Auto React
-    if (status) {
-      try {
-        const reactions = ["🌺", "🤣", "🔥", "🫶", "😎"];
-        const randomReact = reactions[Math.floor(Math.random() * reactions.length)];
-        api.setMessageReaction(randomReact, event.messageID, () => {}, true);
-      } catch (e) {}
-    }
-
-    // 🎵 Voice Map
     const voiceMap = {
       "গান": "https://files.catbox.moe/l0jhdq.mp3",
       "ঘুমা": "https://files.catbox.moe/mofu8n.mp3",
@@ -101,39 +45,32 @@ module.exports = {
       "বায়": "https://files.catbox.moe/fdqh2m.mp3"
     };
 
-    // 🔍 STRICT WORD MATCH (main fix)
     for (const key in voiceMap) {
-      const escapedKey = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const escapedKey = key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
       const pattern = new RegExp(`(^|\\s)${escapedKey}(\\s|$)`, "i");
 
       if (pattern.test(inputRaw)) {
-        const audioUrl = voiceMap[key];
-
         const cacheDir = path.join(__dirname, "cache", "voices");
         fs.ensureDirSync(cacheDir);
 
-        const fileName = `${Buffer.from(key).toString("hex")}.mp3`;
-        const filePath = path.join(cacheDir, fileName);
+        const filePath = path.join(
+          cacheDir,
+          `${Buffer.from(key).toString("hex")}.mp3`
+        );
 
         try {
-          if (fs.existsSync(filePath)) {
-            return await message.reply({
-              attachment: fs.createReadStream(filePath)
+          if (!fs.existsSync(filePath)) {
+            const res = await axios.get(voiceMap[key], {
+              responseType: "arraybuffer"
             });
+            fs.writeFileSync(filePath, Buffer.from(res.data));
           }
 
-          const response = await axios.get(audioUrl, {
-            responseType: "arraybuffer"
-          });
-
-          fs.writeFileSync(filePath, Buffer.from(response.data));
-
-          return await message.reply({
+          return message.reply({
             attachment: fs.createReadStream(filePath)
           });
-
-        } catch (error) {
-          console.error("Voice error:", error);
+        } catch (err) {
+          console.error(err);
         }
       }
     }
